@@ -1,0 +1,19 @@
+{
+  "method": "mmppo",
+  "ablation_mode": "fusion",
+  "seed": 83,
+  "actual_env_steps": 1273856,
+  "requested_env_steps": 1273856,
+  "learning_wall_seconds": 4929.195489581674,
+  "optimizer_updates": 6220,
+  "policy_parameters": 112711,
+  "selected_step": 655360,
+  "selected_model_sha256": "aca411c13c4185ef8efa0533e32089ad627ab0f1d8a98a82f7b6ee1032a05447",
+  "final_model_sha256": "79f57df326232e9157dc92eee5ecb8babb412694b7036e4145213309a40e63ef",
+  "protocol_sha256": "aad3c1c3b673c686def74178e65efa5074cdd386c1af1f4afe97febcbf6dd7ac",
+  "device": "cuda",
+  "threads": 1,
+  "host": "gpufree-container",
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130"
+}

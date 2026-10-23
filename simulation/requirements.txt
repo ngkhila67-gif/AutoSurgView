@@ -1,0 +1,11 @@
+# Direct dependencies pinned to versions exercised on this machine.
+# Install the CPU build of torch from its official index first; see 运行说明.txt.
+numpy==2.4.4
+pandas==3.0.3
+scipy==1.17.1
+matplotlib==3.10.9
+torch==2.14.1
+gymnasium==1.3.0
+stable-baselines3==2.9.0
+onnxruntime==1.26.0
+pytest==9.1.1

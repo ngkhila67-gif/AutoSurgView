@@ -1,0 +1,60 @@
+AutoSurgView: private repository upload
+Repository: https://github.com/ngkhila67-gif/AutoSurgView
+Access: private; an authorized GitHub account is required.
+
+Current benchmark scope
+Training seeds: 29, 47 and 83.
+Input configurations: MM-PPO (point clouds and task state), point clouds only,
+and task state only. Each configuration has three policies: nine in total.
+The validation-selected policy weights, validation histories and original
+training manifests are in models/benchmark_three_seed/.
+
+Bundled numerical records
+- episodes.csv.gz: 143,280 rows (9 policies x 15,920 fixed starts).
+  The initially occluded subset contains 104,823 rows (9 x 11,647).
+- all_test_episodes.csv.gz: 286,560 rows, covering validation-selected and
+  final checkpoints for the same nine trained policies. These are two
+  checkpoints per policy, not additional training seeds.
+- final_state_O.csv.gz: 104,823 final-state image-occlusion records.
+- seed_level.csv: 9 rows, one per input configuration and training seed.
+- per_scene_summary.csv: 1,194 rows (3 configurations x 398 scenes).
+These files and their summaries are in simulation/benchmark_three_seed/results/.
+Training-seed fields contain only 29, 47 and 83. Start-state and bootstrap
+random seeds have separate roles and are not policy-training seeds.
+
+Reproduction
+Clone or download this private repository, then follow simulation/README.md. The main entry
+point is modality3_study.py; the default benchmark reproduction uses the
+same three training seeds. reanalyse_reported_seeds.py recomputes numerical
+summaries from the bundled records without retraining policies.
+
+Current analysis specification
+The reported benchmark uses seeds 29, 47 and 83 for each of three input
+configurations. results/analysis_protocol.json records the current endpoints,
+sample counts, numerical inputs and reproduction dependencies. The supplied
+weights and per-model training manifests are unchanged. Numerical reanalysis
+uses bundled records and does not need a model-training protocol file.
+
+Separate deployed policy
+models/deployed/ contains the earlier policy used on the robot, with its
+ONNX copy under robot-controller/models/. This deployed policy is separate
+from the nine benchmark policies and is not an additional benchmark seed.
+
+Repository boundaries
+This repository contains robot software, simulation and analysis code, trained
+policies, numerical benchmark records and supporting manifests. Figure-level
+source data are included at the root as Source Data.xlsx, copied byte-for-byte
+from the journal submission file with 19 worksheets. Point clouds are not
+included; the previous Zenodo attachments are restricted. New training requires
+an authorized local point-cloud copy. Patient images, surgical recordings,
+credentials and proprietary SDK binaries are not included.
+
+Hardware portability
+The original hardware code is unchanged. Before use, configure rig-specific
+output and resource paths for the deployment environment; see
+docs/DEPENDENCIES.md.
+
+Integrity
+PACKAGE MANIFEST.json records every other included file's SHA-256 digest,
+the current package scope and verification information. The manifest itself
+is excluded from its file map.

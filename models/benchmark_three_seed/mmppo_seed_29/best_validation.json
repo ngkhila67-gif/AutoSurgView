@@ -1,0 +1,16 @@
+{
+  "step": 393216,
+  "checkpoint": "checkpoint_0393216.zip",
+  "complete": true,
+  "candidates": 162,
+  "case_sha256": "f48b91396be2ecc2a2984e9e1febfb3448fb5bfb63431ed293b8d0527ad99ba0",
+  "elapsed_seconds": 0.7000752538442612,
+  "n": 94,
+  "macro_strict_success_pct": 99.16666666666667,
+  "macro_success_pct": 99.16666666666667,
+  "pooled_strict_success_pct": 98.93617021276596,
+  "mean_final_score": 5.785364731803182,
+  "mean_path_m": 0.3055319071133086,
+  "successful_path_m": 0.30365590631000455,
+  "self_collision_episodes": 1
+}

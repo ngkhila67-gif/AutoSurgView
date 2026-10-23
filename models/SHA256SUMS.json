@@ -1,0 +1,18 @@
+{
+  "deployed": {
+    "ppo_AnzhenRobot_20.onnx": "6995d15e2d4aa01397b777b1911f47b956c6cbf50cdfb3488995b6528987e1cb",
+    "ppo_AnzhenRobot_20.zip": "6a3e01dc799f6e0062f4b5687e640760af3662f09f794c9d761fafbb536d9b15",
+    "ppo_AnzhenRobot_20_vec_normalize.pkl": "02457b2f927e33813dc18f86cb13c721274085e356bf730a32f249c9ce8cbec6"
+  },
+  "benchmark_three_seed": {
+    "mmppo_seed_29": "c29f3382264e7c5616a3016c9d6746bd1bc194f20606a392c7b93fc11c3e2e75",
+    "mmppo_seed_47": "c39609427dbbb22491b81520c47fcc6cca502456834be1971c09b2d800e16406",
+    "mmppo_seed_83": "aca411c13c4185ef8efa0533e32089ad627ab0f1d8a98a82f7b6ee1032a05447",
+    "pc_seed_29": "91e6df274c40d1f1752d0182ff4149688e7ec085f54139dfa5d485e092227f31",
+    "pc_seed_47": "0118debf5795c886109facef903f89764c0359d89d2a850cabafa4414bb3241d",
+    "pc_seed_83": "fb91f1db0a2a7c5069331b3821109782eeb9c41c65a8c34abd38ddea19d26de3",
+    "state_seed_29": "19a3037aff1adb38e0c178dba2641ad6302ab78759b7321a4383bb34ad3b3d0b",
+    "state_seed_47": "f61cb37358e45549443327664dbdefb9605b144c1278e439ed8db888c38e755c",
+    "state_seed_83": "71ff5f60c1870aaf41f174f521ac5e1c536aacc5f00b34536472d687da7ab0e5"
+  }
+}

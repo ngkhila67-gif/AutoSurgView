@@ -1,0 +1,15 @@
+{
+  "archive_root": "../data/archive",
+  "deployment_root": "../robot-controller",
+  "seed": 20261001,
+  "threshold": 20.0,
+  "max_steps": 40,
+  "action_step_m": 0.08,
+  "action_mode": "clip_norm",
+  "scene_sessions": ["TR0815train_filtered", "TR0820train_filtered", "TR0821train_filtered", "TR0822train_filtered"],
+  "new_training_split": {
+    "train": ["TR0815train_filtered", "TR0820train_filtered"],
+    "validation": ["TR0821train_filtered"],
+    "test": ["TR0822train_filtered"]
+  }
+}

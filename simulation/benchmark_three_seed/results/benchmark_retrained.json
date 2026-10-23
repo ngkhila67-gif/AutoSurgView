@@ -1,0 +1,342 @@
+{
+  "analysis_scope": "Current reported analysis",
+  "selected_seeds": [
+    29,
+    47,
+    83
+  ],
+  "n_policies": 9,
+  "n_eligible_per_policy": 11647,
+  "summary": {
+    "fusion": {
+      "macro_success": {
+        "mean": 96.23950108118991,
+        "sd": 0.5104839678216129
+      },
+      "macro_improved": {
+        "mean": 99.81934937520488,
+        "sd": 0.06198603423877182
+      },
+      "macro_strict_success": {
+        "mean": 96.02924259560064,
+        "sd": 0.5888126610340849
+      },
+      "mean_final": {
+        "mean": 12.097664182353926,
+        "sd": 0.5844165517206972
+      },
+      "mean_reduction_pct": {
+        "mean": 92.58303454134112,
+        "sd": 0.20320132975181301
+      },
+      "mean_decisions": {
+        "mean": 6.0615609169743285,
+        "sd": 0.202552127224876
+      },
+      "self_collision": {
+        "mean": 225.66666666666666,
+        "sd": 124.363713893295
+      },
+      "step_limit": {
+        "mean": 366.3333333333333,
+        "sd": 119.37476003466283
+      },
+      "repeated_unreachable": {
+        "mean": 4.666666666666667,
+        "sd": 8.082903768654761
+      },
+      "mean_path_all": {
+        "mean": 0.4699725939029358,
+        "sd": 0.015038351634592856
+      },
+      "mean_path_success": {
+        "mean": 0.3839204449775182,
+        "sd": 0.00967738478395334
+      },
+      "improved_episodes": {
+        "mean": 11620.666666666666,
+        "sd": 11.67618659209133
+      }
+    },
+    "pointcloud": {
+      "macro_success": {
+        "mean": 88.05621547290473,
+        "sd": 1.7418076575173849
+      },
+      "macro_improved": {
+        "mean": 96.82342627365266,
+        "sd": 0.49676734835083713
+      },
+      "macro_strict_success": {
+        "mean": 87.51672283495975,
+        "sd": 2.0930513914324105
+      },
+      "mean_final": {
+        "mean": 34.54119271002653,
+        "sd": 6.375806767221057
+      },
+      "mean_reduction_pct": {
+        "mean": 84.7380985595933,
+        "sd": 0.9849760451553986
+      },
+      "mean_decisions": {
+        "mean": 6.520820812226325,
+        "sd": 0.20144749181048352
+      },
+      "self_collision": {
+        "mean": 626.6666666666666,
+        "sd": 316.7338525218505
+      },
+      "step_limit": {
+        "mean": 217.66666666666666,
+        "sd": 31.973947728319903
+      },
+      "repeated_unreachable": {
+        "mean": 804.6666666666666,
+        "sd": 163.6378114414066
+      },
+      "mean_path_all": {
+        "mean": 0.48634686993693527,
+        "sd": 0.021501273490643305
+      },
+      "mean_path_success": {
+        "mean": 0.4007167181212543,
+        "sd": 0.009358513554776196
+      },
+      "improved_episodes": {
+        "mean": 11264.666666666666,
+        "sd": 64.65549731719132
+      }
+    },
+    "robotstate": {
+      "macro_success": {
+        "mean": 94.06086175755001,
+        "sd": 0.8957511406796224
+      },
+      "macro_improved": {
+        "mean": 99.1039151032956,
+        "sd": 0.1889022739231998
+      },
+      "macro_strict_success": {
+        "mean": 93.93392848219271,
+        "sd": 0.9613503038795826
+      },
+      "mean_final": {
+        "mean": 21.69951350129385,
+        "sd": 2.402693411830626
+      },
+      "mean_reduction_pct": {
+        "mean": 90.31495360971032,
+        "sd": 0.7122992099856329
+      },
+      "mean_decisions": {
+        "mean": 7.656678400732663,
+        "sd": 0.5532169023419584
+      },
+      "self_collision": {
+        "mean": 181.33333333333334,
+        "sd": 179.85086414397162
+      },
+      "step_limit": {
+        "mean": 704.0,
+        "sd": 160.03749560649842
+      },
+      "repeated_unreachable": {
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "mean_path_all": {
+        "mean": 0.5857479138679672,
+        "sd": 0.044848496293115186
+      },
+      "mean_path_success": {
+        "mean": 0.4283610643798091,
+        "sd": 0.01693910641822379
+      },
+      "improved_episodes": {
+        "mean": 11519.0,
+        "sd": 26.514147167125703
+      }
+    }
+  },
+  "gains_over_single_inputs": {
+    "pointcloud": {
+      "per_seed": [
+        9.701339800168142,
+        8.146513302553842,
+        6.702003722133583
+      ],
+      "mean": 8.183285608285189,
+      "t95": [
+        4.45706382195103,
+        11.909507394619348
+      ],
+      "seeds_favouring_mmppo": 3
+    },
+    "robotstate": {
+      "per_seed": [
+        2.3002511398888714,
+        1.7039604504885801,
+        2.5317063805422464
+      ],
+      "mean": 2.1786393236398993,
+      "t95": [
+        1.1177557274630134,
+        3.2395229198167854
+      ],
+      "seeds_favouring_mmppo": 3
+    }
+  },
+  "collision_free": {
+    "pointcloud": {
+      "estimate": 87.51672283495975,
+      "ci95": [
+        85.43143672972923,
+        89.4898460234346
+      ],
+      "seeds": [
+        85.13028025400932,
+        88.37898644982197,
+        89.04090180104795
+      ]
+    },
+    "robotstate": {
+      "estimate": 93.93392848219273,
+      "ci95": [
+        91.86003845539997,
+        95.75271208222627
+      ],
+      "seeds": [
+        93.39741168183444,
+        95.04379647058326,
+        93.36057729416048
+      ]
+    },
+    "fusion": {
+      "estimate": 96.02924259560062,
+      "ci95": [
+        94.3384686957875,
+        97.42948937119422
+      ],
+      "seeds": [
+        95.60043537453011,
+        96.70058561695791,
+        95.78670679531388
+      ]
+    },
+    "fusion_minus_pointcloud": {
+      "estimate": 8.512519760640885,
+      "ci95": [
+        6.797185882604948,
+        10.179883667482743
+      ],
+      "t95": [
+        3.868421836676486,
+        13.156617684605283
+      ],
+      "per_seed": [
+        10.470155120520786,
+        8.321599167135943,
+        6.745804994265924
+      ],
+      "seeds_favouring_mmppo": 3
+    },
+    "fusion_minus_robotstate": {
+      "estimate": 2.095314113407904,
+      "ci95": [
+        0.9414661980988968,
+        3.349828077665689
+      ],
+      "t95": [
+        1.112046841123075,
+        3.078581385692733
+      ],
+      "per_seed": [
+        2.203023692695666,
+        1.6567891463746491,
+        2.4261295011533974
+      ],
+      "seeds_favouring_mmppo": 3
+    }
+  },
+  "pooled_rates": {
+    "fusion": {
+      "success": 95.14037949686615,
+      "strict": 94.87707850376349
+    },
+    "pointcloud": {
+      "success": 86.48865229959074,
+      "strict": 85.84184768609943
+    },
+    "robotstate": {
+      "success": 92.55029907558455,
+      "strict": 92.39861480781889
+    }
+  },
+  "fig15": [
+    {
+      "method": "pointcloud",
+      "metric": "macro_success_percent",
+      "estimate": 88.0562154729,
+      "ci95_low": 86.064079477,
+      "ci95_high": 89.951740824,
+      "scenes": 398
+    },
+    {
+      "method": "robotstate",
+      "metric": "macro_success_percent",
+      "estimate": 94.0608617576,
+      "ci95_low": 92.0272398058,
+      "ci95_high": 95.8580724904,
+      "scenes": 398
+    },
+    {
+      "method": "fusion",
+      "metric": "macro_success_percent",
+      "estimate": 96.2395010812,
+      "ci95_low": 94.6052426144,
+      "ci95_high": 97.5940863833,
+      "scenes": 398
+    },
+    {
+      "method": "pointcloud",
+      "metric": "macro_improved_percent",
+      "estimate": 96.8234262737,
+      "ci95_low": 96.0298324544,
+      "ci95_high": 97.5261869455,
+      "scenes": 398
+    },
+    {
+      "method": "robotstate",
+      "metric": "macro_improved_percent",
+      "estimate": 99.1039151033,
+      "ci95_low": 98.6726819541,
+      "ci95_high": 99.4716766945,
+      "scenes": 398
+    },
+    {
+      "method": "fusion",
+      "metric": "macro_improved_percent",
+      "estimate": 99.8193493752,
+      "ci95_low": 99.6443697296,
+      "ci95_high": 99.9532303702,
+      "scenes": 398
+    },
+    {
+      "method": "fusion_minus_pointcloud",
+      "metric": "paired_macro_success_gain_pp",
+      "estimate": 8.18328560829,
+      "ci95_low": 6.43077636023,
+      "ci95_high": 9.83325554863,
+      "scenes": 398
+    },
+    {
+      "method": "fusion_minus_robotstate",
+      "metric": "paired_macro_success_gain_pp",
+      "estimate": 2.17863932364,
+      "ci95_low": 1.03838647473,
+      "ci95_high": 3.41392171617,
+      "scenes": 398
+    }
+  ]
+}

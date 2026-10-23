@@ -1,0 +1,25 @@
+{
+  "model_sha256": "6a3e01dc799f6e0062f4b5687e640760af3662f09f794c9d761fafbb536d9b15",
+  "normalization_file_sha256": "02457b2f927e33813dc18f86cb13c721274085e356bf730a32f249c9ce8cbec6",
+  "normalization": {
+    "num_envs": 1,
+    "norm_obs": false,
+    "clip_reward": 10.0,
+    "gamma": 0.99,
+    "epsilon": 1e-08,
+    "norm_reward": true
+  },
+  "algorithm_metadata": {
+    "num_timesteps": 1273856,
+    "learning_rate": 0.0003,
+    "n_steps": 2048,
+    "batch_size": 256,
+    "n_epochs": 10,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ent_coef": 0.0,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5
+  },
+  "note": "Fresh running reward statistics for every new training seed; no test or archived statistics used for fresh training."
+}

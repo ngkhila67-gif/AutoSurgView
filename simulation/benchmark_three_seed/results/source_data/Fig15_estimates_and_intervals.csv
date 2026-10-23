@@ -1,0 +1,9 @@
+﻿method,metric,estimate,ci95_low,ci95_high,scenes
+pointcloud,macro_success_percent,88.0562154729,86.064079477,89.951740824,398
+robotstate,macro_success_percent,94.0608617576,92.0272398058,95.8580724904,398
+fusion,macro_success_percent,96.2395010812,94.6052426144,97.5940863833,398
+pointcloud,macro_improved_percent,96.8234262737,96.0298324544,97.5261869455,398
+robotstate,macro_improved_percent,99.1039151033,98.6726819541,99.4716766945,398
+fusion,macro_improved_percent,99.8193493752,99.6443697296,99.9532303702,398
+fusion_minus_pointcloud,paired_macro_success_gain_pp,8.18328560829,6.43077636023,9.83325554863,398
+fusion_minus_robotstate,paired_macro_success_gain_pp,2.17863932364,1.03838647473,3.41392171617,398

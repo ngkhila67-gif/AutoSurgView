@@ -1,0 +1,58 @@
+{
+  "analysis_type": "Current reported analysis",
+  "selected_seeds": [
+    29,
+    47,
+    83
+  ],
+  "configurations": {
+    "mmppo": "point clouds and task state",
+    "pc": "point clouds only",
+    "state": "task state only"
+  },
+  "policies": 9,
+  "checkpoint_selection": "Validation-selected checkpoints; final checkpoints are reported separately.",
+  "primary_endpoint": "Scene-macro collision-free recovery: occlusion score V below 20 within 40 decisions, among initially occluded starts.",
+  "secondary_endpoints": [
+    "Recovery including collisions",
+    "Final occlusion score",
+    "Path length for successful episodes",
+    "Final-state image occlusion rate O at or below 20 percent"
+  ],
+  "n_candidates_per_policy": 15920,
+  "n_eligible_per_policy": 11647,
+  "test_scenes": 398,
+  "starts_per_scene": 40,
+  "acquisition_folders": 47,
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261002,
+  "seed_level_interval": "Two-sided 95 percent Student t interval over the three seed-level values, with 2 degrees of freedom.",
+  "reanalysis_entry_point": "reanalyse_reported_seeds.py",
+  "reanalysis_inputs": [
+    "results/episodes.csv.gz",
+    "results/seed_level.csv",
+    "results/analysis_v3.json",
+    "results/final_state_O.csv.gz"
+  ],
+  "reanalysis_support": "../ncsim/publication_figures.py and its local imports",
+  "training_reproduction": "modality3_study.py prepare/run/aggregate creates a new protocol and nine training jobs using seeds 29, 47 and 83.",
+  "training_inputs": [
+    "inputs/ordered_dataset.json",
+    "inputs/starts.json",
+    "An authorized local point-cloud copy specified by NC_POINTDATA",
+    "A compiled native backend specified by NC_HISTORY"
+  ],
+  "files": {
+    "results/all_test_episodes.csv.gz": "1e7bf3aec76705a87de5c00ac5cb9b09b157be08406050b7d677700145213b7f",
+    "results/analysis_v3.json": "a9b5958a83fc52973b771a8d9aeeef5ac595bd8f58ac6a24bd205e27e9128add",
+    "results/benchmark_retrained.json": "43e98a83761c56a9e8466153fd891db618204cac3317087ec6924269260f297f",
+    "results/episodes.csv.gz": "72094d245f215ac3e5c8ab8306a98d16569679c6b3994ec5dd4f097a67715f92",
+    "results/final_state_O.csv.gz": "c5aea77a9d931595585b02ac2458d5f1a0f1c08986aadf9804c3c04528ead370",
+    "results/per_scene_summary.csv": "0cc9ddca011238375052a116d7dcbca4959494eb20000ebf789b50b09399b953",
+    "results/seed_level.csv": "0faec1ffb520cda131010251e498372ede7c0a1fcb55a35f307e5f59addea1b3",
+    "results/source_data/Fig15_estimates_and_intervals.csv": "e975ae65f5eaf852026c59703ee092e9ad27126438d412b1230d14324f87a52d",
+    "results/source_data/Fig15_scene_data.csv": "50f9e3a0c0162c88d343799247ebb773e67678657c880fd8415e62d7625fb097",
+    "results/source_data/Fig16_curves_and_intervals.csv": "cc19f569b1190e4bf6f6876c6cc1b7ec8e25a0b37b8457b7a0e99b796dfb9f79",
+    "results/source_data/Fig17_stratified_estimates.csv": "fd1ad49fcc6f6b9dd97aebdd7c174e290efe343f2c4a2cadaadc52d6d24924a1"
+  }
+}

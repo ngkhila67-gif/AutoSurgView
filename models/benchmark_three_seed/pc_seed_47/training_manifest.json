@@ -1,0 +1,19 @@
+{
+  "method": "pc",
+  "ablation_mode": "only_pc",
+  "seed": 47,
+  "actual_env_steps": 1273856,
+  "requested_env_steps": 1273856,
+  "learning_wall_seconds": 4729.09396629408,
+  "optimizer_updates": 6220,
+  "policy_parameters": 99911,
+  "selected_step": 655360,
+  "selected_model_sha256": "0118debf5795c886109facef903f89764c0359d89d2a850cabafa4414bb3241d",
+  "final_model_sha256": "8d4da511ebaba572f4987098df63237920152f0eda9e12aa8278563bcff20f4d",
+  "protocol_sha256": "aad3c1c3b673c686def74178e65efa5074cdd386c1af1f4afe97febcbf6dd7ac",
+  "device": "cuda",
+  "threads": 1,
+  "host": "gpufree-container",
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130"
+}
