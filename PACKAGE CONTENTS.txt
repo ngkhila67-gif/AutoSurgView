@@ -43,8 +43,9 @@ from the nine benchmark policies and is not an additional benchmark seed.
 Repository boundaries
 This repository contains robot software, simulation and analysis code, trained
 policies, numerical benchmark records and supporting manifests. Figure-level
-source data are included at the root as Source Data.xlsx, copied byte-for-byte
-from the journal submission file with 19 worksheets. Point clouds are not
+source data are included at the root as Source Data.xlsx, identical to the
+journal submission file (19 worksheets). The copy in the Zenodo record contains
+the same values with different cell formatting. Point clouds are not
 included in this repository; download Point Clouds.zip from the public dataset
 https://doi.org/10.5281/zenodo.23601833 and set NC_POINTDATA to the extracted
 Point Clouds/pointclouds directory. Fresh simulation or training also requires
