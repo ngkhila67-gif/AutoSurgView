@@ -5,6 +5,7 @@ import numpy as np
 from .data import ROOT,sha256
 from . import geometry,native_backend
 from .paper_evaluation import PaperEnv
+from .portable_native import load_library, manifest_path
 
 _HANDLES=[]
 _LIB=None
@@ -13,16 +14,14 @@ _CAMERA=None
 
 def configure(out):
     global _LIB,_CAMERA
-    out=Path(out)
-    m=json.loads((out/'historical_backend_manifest.json').read_text(encoding='utf-8'))
-    path=out/'historical_backend_05405.dll'
-    if sha256(path)!=m['dll_sha256'] or sha256(m['source'])!=m['source_sha256']:
-        raise ValueError('Historical variant source or binary checksum changed')
-    _HANDLES.append(os.add_dll_directory(m['runtime_dll_directory']))
-    _LIB=ctypes.CDLL(str(path))
+    out=Path(out).resolve()
+    _LIB,m,_=load_library(out,'historical_backend_manifest.json','historical_backend_05405')
+    source_path=manifest_path(out,m['source'])
+    if sha256(source_path)!=m['source_sha256']:
+        raise ValueError('Historical geometry source checksum changed')
     ptr=ctypes.POINTER(ctypes.c_double)
     _LIB.nc_ik.argtypes=[ptr,ptr,ptr,ctypes.c_int,ctypes.c_double];_LIB.nc_ik.restype=ctypes.c_int
-    source=Path(m['source']).read_text(encoding='utf-8-sig')
+    source=source_path.read_text(encoding='utf-8-sig')
     tree=ast.parse(source)
     names={'get_Tacm','get_T13','get_paltformangle','get_pyramid'}
     nodes=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in names]
@@ -30,7 +29,7 @@ def configure(out):
     def compose(t,R,s):
         T=np.eye(4);T[:3,:3]=R@np.diag(s);T[:3,3]=t;return T
     ns=dict(np=np,math=math,compose=compose,axangle2mat=lambda axis,a:geometry.transform([0,0,0],axis,a)[:3,:3])
-    exec(compile(ast.Module(body=nodes,type_ignores=[]),m['source'],'exec'),ns)
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),str(source_path),'exec'),ns)
     _CAMERA=ns
 
 

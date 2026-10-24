@@ -1,0 +1,32 @@
+{
+  "format_version": 2,
+  "engine": "archived_cpp_native_v2",
+  "kdl_version": "1.5.1",
+  "scope": "Archived KDL and collision algorithms; packaged native execution prerequisites.",
+  "runtime_files": {
+    "libwinpthread-1.dll": "2b1640f66a7a2e0254a491c7d0a83fbcc6f353d6b1316786c546a732b3e7a7f8"
+  },
+  "kdl_source": "source/vendor/kdl",
+  "collision_source": "source/collision",
+  "runtime_dll_directory": "runtime",
+  "binding_source": "source/baseline_backend.cpp",
+  "binding_sha256": "2c2057d4e51f351248442e26f95fa6b15f1cf3e84885a0e11149617abdb6eb12",
+  "libraries": {
+    "windows": {
+      "file": "original_backend.dll",
+      "sha256": "75df9f27dcc9689da4a707b5eebccead55912b6f22d94ab940ffdeda1b72c047"
+    },
+    "linux": {
+      "file": "original_backend.so",
+      "sha256": "09cbc8f759b5480e52b30aac35ec838508205b0a8b011e912a6a21e336a1db75",
+      "built_on": "Linux-5.15.0-181-generic-x86_64-with-glibc2.39",
+      "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "needed": [
+        "libstdc++.so.6",
+        "libm.so.6",
+        "libgcc_s.so.1",
+        "libc.so.6"
+      ]
+    }
+  }
+}

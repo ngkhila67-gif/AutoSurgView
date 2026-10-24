@@ -49,15 +49,20 @@ included in this repository; download Point Clouds.zip from the public dataset
 https://doi.org/10.5281/zenodo.23601833 and set NC_POINTDATA to the extracted
 Point Clouds/pointclouds directory. Fresh simulation or training also requires
 the compatible native backends and runtime dependencies described in
-simulation/README.md. Patient images, surgical recordings,
+simulation/README.md. Windows and Linux native binaries, their manifests,
+geometry source and rebuild sources are now included at the default paths. Patient images, surgical recordings,
 credentials and proprietary SDK binaries are not included.
 
 Hardware portability
-The original hardware code is unchanged. Before use, configure rig-specific
+The hardware source is adapted from the 23 January 2026 controller for MM-PPO
+recovery and manual takeover. Packaging, attribution and portability changes
+are documented. Before use, configure rig-specific
 output and resource paths for the deployment environment; see
 docs/DEPENDENCIES.md.
 
 Integrity
 PACKAGE MANIFEST.json records every other included file's SHA-256 digest,
 the current package scope and verification information. The manifest itself
-is excluded from its file map.
+is excluded from its file map. Use tools/regenerate_package_manifest.py
+(--check to verify). .gitattributes preserves stored line endings.
+Third-party licence boundaries are documented in THIRD_PARTY_NOTICES.md.

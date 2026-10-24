@@ -16,11 +16,21 @@ python reanalyse_reported_seeds.py --out outputs/reanalysis
 
 This reads the bundled per-episode records and recorded final-state occlusion rates, recomputes per-seed values, scene averages, paired differences, seed-level t intervals (2 degrees of freedom), and acquisition-folder bootstrap intervals (47 folders, 2,000 resamples, random seed 20261002). The selected policies' original weights and training manifests are in `models/benchmark_three_seed/` at the repository root. Figure-level numerical data are included in the repository-root [Source Data.xlsx](../Source%20Data.xlsx) (19 worksheets); no original clinical images or recordings are included.
 
+## Replay the supplied policies
+
+Set `NC_POINTDATA` to the extracted `Point Clouds/pointclouds` directory, then run `python simulation/benchmark_three_seed/replay_reported_policies.py` from the repository root. It uses the nine supplied validation-selected models and all 398 × 40 fixed starts without training. `--scene-limit 1` checks the first scene; `--method mmppo --seed 29` selects one policy. Outputs go to a new directory given by `--out` and do not overwrite the supplied results.
+
 ## Train a new reproduction
 
 Download `Point Clouds.zip` from the public [Zenodo dataset](https://doi.org/10.5281/zenodo.23601833), extract it, and set `NC_POINTDATA` to the absolute path of `Point Clouds/pointclouds`. The numerical reanalysis above uses bundled records and does not require those point clouds.
 
-Fresh simulation or training also requires the compatible native backends. From the `simulation` directory, `python native/build_native.py` builds the original backend when its toolchain and external dependencies are installed. The three-seed entry point loads `benchmark_three_seed/native/original_backend.dll` and its `build_manifest.json`; make the compatible build and manifest available there. Set `NC_HISTORY` to the directory containing `historical_backend_05405.dll`, `historical_backend_manifest.json`, and the geometry source referenced by that manifest, with its runtime libraries available. This 0.5405 m backend and its matching source must be supplied separately; the point-cloud download and the original-backend build do not supply them. Once these prerequisites are configured, run:
+The package supplies both Windows x64 and Linux x86-64 native libraries, relative-path manifests and the historical geometry source. `benchmark_three_seed/native/` contains `original_backend` and `build_manifest.json`; `outputs/historical_reproduction_20261002/` contains the 0.5405 m backend, its manifest and `geometry_source.py`. `NC_HISTORY` is optional. Check the native prerequisites from the repository root before training:
+
+```sh
+python simulation/native/check_native.py
+```
+
+The original archived binaries are bundled without numerical changes. Linux binaries were built on Ubuntu 24.04.1 x86-64 with GCC 13.3.0. Rebuild on an incompatible platform with `python simulation/native/build_native.py`; it installs both backends in the default locations and updates their platform hashes. This requires a compiler and OpenCV development headers/libraries, but the original KDL 1.5.1, Eigen 3.3.7 and collision sources are included. Windows uses the bundled winpthreads runtime. See [`native/README.md`](native/README.md) for build and platform details. Then, from `simulation`, run:
 
 ```sh
 cd benchmark_three_seed
@@ -33,4 +43,8 @@ The default seeds are 29, 47 and 83 across all three input configurations. `prep
 
 ## Other components
 
-`ncsim/` contains the environment, KDL bindings, geometry, network and CBF safety-filter evaluation. `native/` contains the C++ backend and build scripts. `occlusion_calibration.py` relates geometric score to image occlusion rate. Environment versions are recorded in `environment_versions.json`; vendor dependencies are installed separately as described in `../docs/DEPENDENCIES.md`.
+`ncsim/` contains the environment, KDL bindings, geometry, network and CBF safety-filter evaluation. `native/` contains the C++ backend and build scripts. `occlusion_calibration.py` relates geometric score to image occlusion rate. Environment versions are recorded in `environment_versions.json`; external hardware SDKs are obtained separately as described in `../docs/DEPENDENCIES.md`.
+
+## Result-file interpretation
+
+See the [manuscript mapping in the main README](../README.md#manuscript-results-and-repository-files). `Fig15/16/17` CSV prefixes are legacy analysis labels. The 8.18 pp value in `Fig15_estimates_and_intervals.csv` is the recovery gain allowing self-collisions; the primary collision-free gain is 8.51 pp. The supported manuscript reproduction entry point is `benchmark_three_seed/modality3_study.py`.

@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import numpy as np
 from .data import ROOT, sha256
+from .portable_native import load_library, library_record, manifest_path
 
 ENGINE='archived_cpp_native_v2'
 SOURCE_PI=3.1415926
@@ -17,16 +18,7 @@ _DLL_DIRECTORIES=[]
 
 @lru_cache(maxsize=1)
 def library():
-    folder=ROOT/'native'
-    manifest=folder/'build_manifest.json'
-    path=folder/'original_backend.dll'
-    if not manifest.exists() or not path.exists():
-        raise RuntimeError('Original native backend missing. Run native/build_native.py; no fallback is allowed.')
-    metadata=json.loads(manifest.read_text(encoding='utf-8'))
-    if sha256(path)!=metadata['dll_sha256']:
-        raise RuntimeError('Native backend checksum mismatch; rebuild and verify before running.')
-    _DLL_DIRECTORIES.append(os.add_dll_directory(metadata['runtime_dll_directory']))
-    lib=ctypes.CDLL(str(path))
+    lib,metadata,manifest=load_library(ROOT/'native','build_manifest.json','original_backend')
     ptr=ctypes.POINTER(ctypes.c_double)
     signatures=dict(nc_fk=[ptr,ptr],nc_ik=[ptr,ptr,ptr,ctypes.c_int,ctypes.c_double],
                     nc_self_collision=[ptr],nc_obstacle_collision=[ptr,ptr,ctypes.c_int],
@@ -104,6 +96,6 @@ def provenance():
     library()
     path=ROOT/'native/build_manifest.json'
     m=json.loads(path.read_text(encoding='utf-8'))
-    return dict(engine=ENGINE,kdl_version=m['kdl_version'],dll_sha256=m['dll_sha256'],
+    return dict(engine=ENGINE,kdl_version=m['kdl_version'],dll_sha256=library_record(m,'original_backend')['sha256'],
                 build_manifest=str(path),build_manifest_sha256=sha256(path),
                 kdl_source=m['kdl_source'],collision_source=m['collision_source'],scope=m['scope'])

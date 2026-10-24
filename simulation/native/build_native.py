@@ -1,78 +1,64 @@
-"""Compile locally archived source files without modifying their implementations."""
+"""Build both archived backends and install them at the default package paths."""
+import argparse,hashlib,json,os,shlex,shutil,subprocess,sys
 from pathlib import Path
-import hashlib
-import json
-import os
-import shutil
-import subprocess
-import sys
 
-ROOT=Path(__file__).resolve().parent
-LIBS=Path(os.environ.get('NC_SSBOT_LIB', ROOT/'third_party'))  # folder holding orocos_kdl and Eigen
-KDL=LIBS/'orocos_kdl'
-EIGEN=LIBS/'PCL 1.10.1/3rdParty/Eigen/eigen3'
-COLLISION=Path(os.environ.get('NC_ROBOT_SOURCE', ROOT.parents[1]/'robot-controller'))
-TOOLCHAIN=Path(os.environ.get('MSYS2_UCRT64', 'C:/msys64/ucrt64'))
+HERE=Path(__file__).resolve().parent
+SIM=HERE.parent
+SOURCE=HERE/'source'
+HISTORY=SIM/'outputs/historical_reproduction_20261002'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+read=lambda p:json.loads(Path(p).read_text(encoding='utf-8'))
 
-def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def write(path,value):
+    Path(path).write_text(json.dumps(value,indent=2)+'\n',encoding='utf-8',newline='\n')
 
-def main():
-    vendor=ROOT/'vendor'
-    vendor.mkdir(exist_ok=True)
-    for src,dst in [(KDL/'src',vendor/'kdl'),(EIGEN/'Eigen',vendor/'eigen/Eigen')]:
-        shutil.copytree(src,dst,dirs_exist_ok=True)
-    shutil.copy2(KDL/'COPYING',vendor/'KDL_COPYING')
-    shutil.copy2(KDL/'build/src/config.h',vendor/'kdl/config.h')
-    (vendor/'collision').mkdir(exist_ok=True)
-    compile_collision=ROOT/'compile_utf8'
-    compile_collision.mkdir(exist_ok=True)
-    for name in ['collision.cpp','collision.h','q_tree.h']:
-        shutil.copy2(COLLISION/name,vendor/'collision'/name)
-        # Only source encoding changes. Keep byte-identical originals in vendor.
-        original=(COLLISION/name).read_bytes().decode('gb18030')
-        (compile_collision/name).write_bytes(original.encode('utf-8'))
-    sources=['chain.cpp','segment.cpp','joint.cpp','frames.cpp','frames_io.cpp',
-             'rigidbodyinertia.cpp','rotationalinertia.cpp','jntarray.cpp','jacobian.cpp',
-             'chainfksolverpos_recursive.cpp','chainjnttojacsolver.cpp',
-             'chainiksolvervel_pinv.cpp','chainiksolverpos_nr.cpp',
-             'utilities/svd_HH.cpp','utilities/utility.cxx','utilities/utility_io.cxx','utilities/error_stack.cxx']
-    args=[str(TOOLCHAIN/'bin/g++.exe'),'-std=c++14','-O2','-w','-shared',
-          '-include','kdl_compile_compat.h',
-          '-static-libgcc','-static-libstdc++','-Ivendor/kdl','-Ivendor/eigen',
-          '-Icompile_utf8',f'-I{TOOLCHAIN.as_posix()}/include/opencv4',
-          'backend.cpp','compile_utf8/collision.cpp',
-          *['vendor/kdl/'+s for s in sources],
-          f'-L{TOOLCHAIN.as_posix()}/lib','-lopencv_core','-o','original_backend.dll']
-    env=os.environ.copy();env['PATH']=str(TOOLCHAIN/'bin')+os.pathsep+env['PATH']
-    result=subprocess.run(args,cwd=ROOT,env=env,capture_output=True,text=True,errors='replace')
-    (ROOT/'build.log').write_text(result.stdout+result.stderr,encoding='utf-8')
-    if result.returncode:
-        print((result.stdout+result.stderr)[-10000:]);return result.returncode
-    provenance={}
-    for p in (vendor/'kdl').rglob('*'):
-        if p.is_file():
-            src=(KDL/'build/src/config.h') if p.name=='config.h' else (KDL/'src'/p.relative_to(vendor/'kdl'))
-            assert p.read_bytes()==src.read_bytes()
-            provenance[str(p.relative_to(ROOT))]=dict(source=str(src),sha256=digest(p))
-    for name in ['collision.cpp','collision.h','q_tree.h']:
-        p=vendor/'collision'/name
-        assert p.read_bytes()==(COLLISION/name).read_bytes()
-        provenance[str(p.relative_to(ROOT))]=dict(source=str(COLLISION/name),sha256=digest(p))
-    record=dict(engine='archived_cpp_native_v2',kdl_version='1.5.1',
-                kdl_source=str(KDL),collision_source=str(COLLISION),
-                runtime_dll_directory=str(TOOLCHAIN/'bin'),
-                compiler=subprocess.check_output([args[0],'--version'],env=env,text=True).splitlines()[0],
-                command=args,source_files=provenance,
-                binding_sha256=digest(ROOT/'backend.cpp'),dll_sha256=digest(ROOT/'original_backend.dll'),
-                build_compatibility='Collision source transcoded GB18030 to UTF-8 with identical decoded text; forced declaration of KDL::PI already defined in archived utility.cxx. No solver or collision algorithm edits.',
-                transcoded_source_sha256={str(p.relative_to(ROOT)):digest(p) for p in compile_collision.glob('*')},
-                compatibility_header_sha256=digest(ROOT/'kdl_compile_compat.h'),
-                scope='Original archived KDL solver source and NC deployment collision.cpp compiled without algorithm edits. Historical Python collision module identity remains unverified.')
-    (ROOT/'build_manifest.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
-    print('Compiled archived KDL 1.5.1 and unmodified NC collision.cpp successfully.')
-    return 0
+def build(compiler=None):
+    if os.name!='nt' and not sys.platform.startswith('linux'):
+        raise RuntimeError('Build on Windows x64 or Linux x86-64.')
+    platform,extension=('windows','.dll') if os.name=='nt' else ('linux','.so')
+    source_manifest=read(HERE/'source_manifest.json')
+    for relative,expected in source_manifest['files'].items():
+        if sha(SOURCE/relative)!=expected:raise ValueError('Native source checksum mismatch: '+relative)
+    env=os.environ.copy()
+    if os.name=='nt':
+        toolchain=Path(os.environ.get('MSYS2_UCRT64','C:/msys64/ucrt64'))
+        compiler=compiler or os.environ.get('CXX') or str(toolchain/'bin/g++.exe')
+        env['PATH']=str(toolchain/'bin')+os.pathsep+env.get('PATH','')
+        flags=['-static-libgcc','-static-libstdc++','-I'+(toolchain/'include/opencv4').as_posix()]
+        libraries=['-L'+(toolchain/'lib').as_posix(),'-lopencv_core']
+    else:
+        compiler=compiler or os.environ.get('CXX','g++')
+        flags=['-fPIC']+shlex.split(subprocess.check_output(['pkg-config','--cflags','opencv4'],text=True))
+        libraries=shlex.split(subprocess.check_output(['pkg-config','--libs-only-L','opencv4'],text=True))+['-lopencv_core','-Wl,--no-undefined']
+    out=HERE/'build'/platform;out.mkdir(parents=True,exist_ok=True)
+    common=[compiler,'-std=c++14','-O2','-shared','-include','elf_exports.h','-include','kdl_compile_compat.h',
+            '-Ivendor/kdl','-Ivendor/eigen','-Icollision',*flags]
+    units=['vendor/kdl/'+name for name in source_manifest['kdl_compilation_units']]
+    jobs=[('original_backend','baseline_backend.cpp',[HERE,SIM/'benchmark_three_seed/native'],'build_manifest.json'),
+          ('historical_backend_05405','historical_backend.cpp',[HISTORY],'historical_backend_manifest.json')]
+    installed=[]
+    for stem,binding,folders,manifest_name in jobs:
+        output=out/(stem+extension)
+        command=common+[binding,'collision/collision.cpp',*units,*libraries,'-o',os.path.relpath(output,SOURCE)]
+        result=subprocess.run(command,cwd=SOURCE,env=env,capture_output=True)
+        (out/(stem+'.log')).write_bytes(result.stdout+result.stderr)
+        if result.returncode:raise RuntimeError('Native compilation failed; see '+str(out/(stem+'.log')))
+        for folder in folders:
+            folder.mkdir(parents=True,exist_ok=True);target=folder/output.name;shutil.copy2(output,target)
+            metadata=read(folder/manifest_name)
+            metadata['libraries'][platform]={'file':target.name,'sha256':sha(target),
+                'compiler':subprocess.check_output([compiler,'--version'],env=env,text=True).splitlines()[0]}
+            write(folder/manifest_name,metadata);installed.append(str(target.relative_to(SIM)))
+    if os.name=='nt':
+        runtime=HERE/'runtime/libwinpthread-1.dll';shutil.copy2(toolchain/'bin/libwinpthread-1.dll',runtime)
+        notice=toolchain/'share/licenses/libwinpthread/COPYING'
+        if notice.is_file():shutil.copy2(notice,HERE/'runtime/WINPTHREADS COPYING.txt')
+        for folder,name in [(HERE,'build_manifest.json'),(SIM/'benchmark_three_seed/native','build_manifest.json'),
+                            (HISTORY,'historical_backend_manifest.json')]:
+            metadata=read(folder/name);metadata['runtime_files']={'libwinpthread-1.dll':sha(runtime)};write(folder/name,metadata)
+    print(json.dumps({'platform':platform,'installed':installed,'source_files_verified':len(source_manifest['files'])},indent=2))
 
 if __name__=='__main__':
-    sys.stdout.reconfigure(encoding='utf-8')
-    sys.exit(main())
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--compiler',help='C++ executable; otherwise CXX or the platform default')
+    build(parser.parse_args().compiler)

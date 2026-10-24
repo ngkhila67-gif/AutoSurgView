@@ -29,9 +29,26 @@ __pycache__/
 .pytest_cache/
 .venv/
 *.o
-simulation/outputs/
+simulation/benchmark_three_seed/outputs/
+simulation/outputs/*
+!simulation/outputs/historical_reproduction_20261002/
+simulation/outputs/historical_reproduction_20261002/*
+!simulation/outputs/historical_reproduction_20261002/historical_backend_05405.dll
+!simulation/outputs/historical_reproduction_20261002/historical_backend_05405.so
+!simulation/outputs/historical_reproduction_20261002/historical_backend_manifest.json
+!simulation/outputs/historical_reproduction_20261002/geometry_source.py
 simulation/native/vendor/eigen/
 simulation/native/third_party/
 simulation/native/*_manifest.json
 simulation/native/*.log
 data/
+
+# Published native prerequisites
+!simulation/native/original_backend.dll
+!simulation/native/build_manifest.json
+!simulation/native/source_manifest.json
+!simulation/benchmark_three_seed/native/original_backend.dll
+!simulation/native/runtime/libwinpthread-1.dll
+!simulation/native/licenses/**
+robot-controller/parameters.txt
+PACKAGE MANIFEST.json.tmp

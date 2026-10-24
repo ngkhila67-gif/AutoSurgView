@@ -1,3 +1,7 @@
+// Hikvision HCNetSDK C# interop declarations (vendor-derived).
+// Source: https://www.hikvision.com/en/support/download/sdk/
+// Excluded from the project MIT licence; Hikvision SDK terms apply.
+// Native vendor SDK binaries are obtained separately. See THIRD_PARTY_NOTICES.md.
 using System;
 using System.Runtime.InteropServices;
 namespace 手术机器人上位机程序
