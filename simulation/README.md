@@ -6,7 +6,7 @@ The reproduction entry point, `modality3_study.py`, uses 29, 47 and 83. Numerica
 
 ## Reproduce the reported numerical analysis
 
-After cloning or downloading the private repository, run the following from its root directory in a Python environment:
+After cloning or downloading the public repository, run the following from its root directory in a Python environment:
 
 ```sh
 python -m pip install -r simulation/requirements.txt
@@ -18,7 +18,9 @@ This reads the bundled per-episode records and recorded final-state occlusion ra
 
 ## Train a new reproduction
 
-From the `simulation` directory, install the Python dependencies, build the native backend with `python native/build_native.py`, and set `NC_POINTDATA` to an authorized local copy of the point-cloud data and `NC_HISTORY` to the compiled native-backend folder. This repository does not include the point clouds. Files at the [previous Zenodo record](https://doi.org/10.5281/zenodo.23456180) are currently restricted. The numerical reanalysis above uses bundled records and does not require those point clouds.
+Download `Point Clouds.zip` from the public [Zenodo dataset](https://doi.org/10.5281/zenodo.23601833), extract it, and set `NC_POINTDATA` to the absolute path of `Point Clouds/pointclouds`. The numerical reanalysis above uses bundled records and does not require those point clouds.
+
+Fresh simulation or training also requires the compatible native backends. From the `simulation` directory, `python native/build_native.py` builds the original backend when its toolchain and external dependencies are installed. The three-seed entry point loads `benchmark_three_seed/native/original_backend.dll` and its `build_manifest.json`; make the compatible build and manifest available there. Set `NC_HISTORY` to the directory containing `historical_backend_05405.dll`, `historical_backend_manifest.json`, and the geometry source referenced by that manifest, with its runtime libraries available. This 0.5405 m backend and its matching source must be supplied separately; the point-cloud download and the original-backend build do not supply them. Once these prerequisites are configured, run:
 
 ```sh
 cd benchmark_three_seed

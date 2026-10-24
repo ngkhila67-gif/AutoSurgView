@@ -35,7 +35,8 @@ NuGet dependencies are declared in the project: MaterialDesignThemes, OpenCvShar
 
 - Python 3.13 with numpy 2.4.4, scipy 1.17.1, pandas 3.0.3, matplotlib 3.10.9, torch 2.14.1, stable-baselines3 2.9.0, gymnasium 1.3.0 and onnxruntime 1.26.0 (versions used for the manuscript; see `simulation/environment_versions.json`).
 - Native backend: MSYS2 UCRT64 GCC toolchain (`MSYS2_UCRT64`), Orocos KDL and Eigen (`NC_SSBOT_LIB`), and the robot's original kinematics and self-collision sources (`robot-controller/`, overridable with `NC_ROBOT_SOURCE`).
-- Measured point clouds of the operating-room test bed (`NC_POINTDATA`) are not included. The files at the [previous Zenodo record](https://doi.org/10.5281/zenodo.23456180) are currently restricted. Use an authorized local copy for training; bundled numerical records remain sufficient for numerical reanalysis.
+- Measured point clouds of the operating-room test bed are provided separately in the public [Zenodo dataset](https://doi.org/10.5281/zenodo.23601833). Extract `Point Clouds.zip` and set `NC_POINTDATA` to the absolute path of `Point Clouds/pointclouds`. Bundled numerical records remain sufficient for numerical reanalysis.
+- The three-seed training entry point additionally requires `benchmark_three_seed/native/original_backend.dll` and `build_manifest.json`, plus the compatible 0.5405 m backend under `NC_HISTORY`: `historical_backend_05405.dll`, `historical_backend_manifest.json`, the geometry source referenced by that manifest, and its runtime libraries. These are native execution prerequisites; downloading the point-cloud archive does not supply them. See `simulation/README.md`.
 - Robot part meshes used for three-dimensional playback are not redistributed; the benchmark itself uses the original self-collision routine and does not require them.
 
 ## Paths for a new deployment

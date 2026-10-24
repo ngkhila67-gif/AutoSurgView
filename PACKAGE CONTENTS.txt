@@ -1,6 +1,6 @@
-AutoSurgView: private repository upload
+AutoSurgView: public repository
 Repository: https://github.com/ngkhila67-gif/AutoSurgView
-Access: private; an authorized GitHub account is required.
+Access: public; no GitHub sign-in is required to download.
 
 Current benchmark scope
 Training seeds: 29, 47 and 83.
@@ -23,7 +23,7 @@ Training-seed fields contain only 29, 47 and 83. Start-state and bootstrap
 random seeds have separate roles and are not policy-training seeds.
 
 Reproduction
-Clone or download this private repository, then follow simulation/README.md. The main entry
+Clone or download this public repository, then follow simulation/README.md. The main entry
 point is modality3_study.py; the default benchmark reproduction uses the
 same three training seeds. reanalyse_reported_seeds.py recomputes numerical
 summaries from the bundled records without retraining policies.
@@ -45,8 +45,11 @@ This repository contains robot software, simulation and analysis code, trained
 policies, numerical benchmark records and supporting manifests. Figure-level
 source data are included at the root as Source Data.xlsx, copied byte-for-byte
 from the journal submission file with 19 worksheets. Point clouds are not
-included; the previous Zenodo attachments are restricted. New training requires
-an authorized local point-cloud copy. Patient images, surgical recordings,
+included in this repository; download Point Clouds.zip from the public dataset
+https://doi.org/10.5281/zenodo.23601833 and set NC_POINTDATA to the extracted
+Point Clouds/pointclouds directory. Fresh simulation or training also requires
+the compatible native backends and runtime dependencies described in
+simulation/README.md. Patient images, surgical recordings,
 credentials and proprietary SDK binaries are not included.
 
 Hardware portability

@@ -11,7 +11,7 @@ The robot evaluates occlusion of the designated target in three dimensions: a vi
 
 ## Get the repository
 
-This repository is private. Sign in with a GitHub account that has access, then clone it:
+This repository is public. Clone it without a GitHub sign-in:
 
 ```sh
 git clone https://github.com/ngkhila67-gif/AutoSurgView.git
@@ -77,7 +77,7 @@ See [`simulation/README.md`](simulation/README.md) for the environment, the data
 
 ## Data
 
-The measured point clouds of the operating-room test bed (1,990 scenes with target coordinates) are not included in this repository. The files at the [previous Zenodo record](https://doi.org/10.5281/zenodo.23456180) are currently restricted. Training requires an authorized local copy of the point-cloud data; set `NC_POINTDATA` to that copy as described in [`simulation/README.md`](simulation/README.md). The bundled numerical records can be reanalysed without downloading those point clouds.
+The measured point clouds of the operating-room test bed (1,990 scenes with target coordinates), numerical records and figure-level source data are publicly available in the [Zenodo dataset](https://doi.org/10.5281/zenodo.23601833). The point clouds are distributed separately from this repository: extract `Point Clouds.zip` and set `NC_POINTDATA` to the absolute path of `Point Clouds/pointclouds`. Fresh simulation or training also requires the compatible native backends and runtime dependencies described in [`simulation/README.md`](simulation/README.md). The bundled numerical records can be reanalysed without downloading those point clouds.
 
 The three-seed episode records and analysis outputs are included under `simulation/benchmark_three_seed/results/`. Figure-level numerical data are included at the repository root in [Source Data.xlsx](Source%20Data.xlsx), the 19-worksheet journal submission file. The reported input-modality analysis uses seeds 29, 47 and 83 for each of three input configurations (nine policies in total). Checkpoints are selected on the validation set. The current analysis specification, model training manifests and numerical records are included in the repository. Patient data, surgical recordings, credentials, device serial numbers and proprietary SDK binaries are not distributed with this repository.
 

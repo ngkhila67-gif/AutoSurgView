@@ -11,7 +11,7 @@ AutoSurgView 是面向开放手术的遮挡感知机器人相机。术者指定�
 
 ## 获取仓库
 
-本仓库为私有仓库。使用已获得访问权限的 GitHub 账号登录后，可克隆仓库：
+本仓库已公开，无需登录 GitHub 即可克隆：
 
 ```sh
 git clone https://github.com/ngkhila67-gif/AutoSurgView.git
@@ -65,7 +65,7 @@ dotnet build operator-console/AutoSurgView.OperatorConsole.csproj -c Release
 
 ## 数据
 
-本仓库不包含手术室测试平台的实测点云（1,990 个场景及目标坐标）。[原 Zenodo 记录](https://doi.org/10.5281/zenodo.23456180)中的附件目前为受限访问。重新训练时，请使用已获授权的本地点云副本，并按 [`simulation/README.md`](simulation/README.md) 设置 `NC_POINTDATA`。对本仓库内数值记录的重新分析无需下载这些点云。
+手术室测试平台的实测点云（1,990 个场景及目标坐标）、数值记录和按图源数据已在 [Zenodo 数据记录](https://doi.org/10.5281/zenodo.23601833)中公开。点云与本仓库分开提供：解压 `Point Clouds.zip` 后，将 `NC_POINTDATA` 设为 `Point Clouds/pointclouds` 的绝对路径。重新运行仿真或训练还需要 [`simulation/README.md`](simulation/README.md) 中说明的兼容原生后端及运行依赖。对本仓库内数值记录的重新分析无需下载这些点云。
 
 三种子逐回合仿真记录和分析结果位于 `simulation/benchmark_three_seed/results/`；各图数值数据已包含在仓库根目录的 [Source Data.xlsx](Source%20Data.xlsx) 中，该文件为正式投稿使用的 19 工作表版本。本文报告的输入模态分析使用种子 29、47、83，每种输入配置包含 3 个策略，共 9 个策略；检查点由验证集选择。仓库提供当前分析规范、模型训练清单及数值记录。患者数据、手术录像、账号凭据、设备序列号和厂商 SDK 二进制文件均不随本仓库分发。
 
