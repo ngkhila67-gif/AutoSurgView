@@ -56,7 +56,7 @@ cmake -S robot-controller -B build/robot-controller
 cmake --build build/robot-controller --config Release
 ```
 
-The controller loads `robot-controller/models/ppo_AnzhenRobot_20.onnx` (inputs: inside points 256 × 3, outside points 512 × 3, task state 6). Set `AUTOSURGVIEW_CONFIG`, `AUTOSURGVIEW_MODEL` and `AUTOSURGVIEW_LOG_DIR` to override the default paths; occlusion-avoidance events are logged under `<log dir>/RunLogs`.
+The controller loads `robot-controller/models/ppo_AnzhenRobot_20.onnx` (inputs: inside points 256 × 3, outside points 512 × 3, task state 6). Set `AUTOSURGVIEW_CONFIG` and `AUTOSURGVIEW_MODEL` to override the configuration and model paths.
 
 ## Operator console
 

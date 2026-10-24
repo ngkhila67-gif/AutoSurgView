@@ -44,7 +44,7 @@ cmake -S robot-controller -B build/robot-controller
 cmake --build build/robot-controller --config Release
 ```
 
-控制端加载 `robot-controller/models/ppo_AnzhenRobot_20.onnx`（输入：棱锥内点 256 × 3、棱锥外点 512 × 3、任务状态 6 维）。可用 `AUTOSURGVIEW_CONFIG`、`AUTOSURGVIEW_MODEL`、`AUTOSURGVIEW_LOG_DIR` 修改默认路径；遮挡规避事件记录在 `<日志目录>/RunLogs`。部署版持续监测遮挡分数，分数达到 20 时自动开始恢复，低于 20 时停止。
+控制端加载 `robot-controller/models/ppo_AnzhenRobot_20.onnx`（输入：棱锥内点 256 × 3、棱锥外点 512 × 3、任务状态 6 维）。可用 `AUTOSURGVIEW_CONFIG`、`AUTOSURGVIEW_MODEL` 修改配置和模型路径。部署版持续监测遮挡分数，分数达到 20 时自动开始恢复，低于 20 时停止。
 
 ## 操作界面
 
