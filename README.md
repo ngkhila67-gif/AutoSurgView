@@ -81,7 +81,7 @@ Windows and Linux native backends, their manifests and geometry source are inclu
 
 | Manuscript result | File and field or worksheet |
 |---|---|
-| Table 1, input-modality results; Supplementary Table 1 | `results/benchmark_retrained.json`: `collision_free`, `summary`, `pooled_rates`; `results/seed_level.csv` provides the nine individual policies. Image-region endpoints are in `results/analysis_v3.json`. |
+| Table 1, input-modality results; Supplementary Table 1, including final-checkpoint comparisons | `results/benchmark_retrained.json`: `collision_free`, `summary`, `pooled_rates`; `results/seed_level.csv` provides the nine individual policies. Image-region endpoints and final-checkpoint recovery are in `results/analysis_v3.json` (`summary[*].final_ckpt_recovery_cf`); final-checkpoint episode records are in `results/all_test_episodes.csv.gz` (`checkpoint=test_final`). |
 | Fig. 3a, collision-free recovery | `Source Data.xlsx` → `Figure 3`, panel a; `results/seed_level.csv` → `macro_strict_success`; `results/benchmark_retrained.json` → `collision_free`. |
 | Fig. 3b, terminal score | `Source Data.xlsx` → `Figure 3`, panel b; `results/seed_level.csv` → `mean_final`. |
 | Fig. 3c, final image-region recovery | `Source Data.xlsx` → `Figure 3`, panel c; `results/analysis_v3.json` → `secondary_O_le_20`; original final-state measurements are in `results/final_state_O.csv.gz`. |
@@ -89,7 +89,9 @@ Windows and Linux native backends, their manifests and geometry source are inclu
 | Supplementary Fig. 6; Supplementary Fig. 7 | `results/episodes.csv.gz`, `results/per_scene_summary.csv`, `results/seed_level.csv`, and `results/source_data/Fig16_curves_and_intervals.csv`; corresponding workbook sheets. |
 | Table 1 safety-filter rows; Fig. 3f,g; Supplementary Table 2 | `Source Data.xlsx` → `Figure 3`, `Supplementary Figure 10` and `Supplementary Figure 11`. |
 | Fig. 4; Fig. 5; Fig. 6 and the other quantitative supplementary figures | Their explicitly numbered worksheets in `Source Data.xlsx`. |
-| Supplementary Fig. 9, validation and final-checkpoint comparisons | `results/analysis_v3.json`, `results/all_test_episodes.csv.gz`, `models/benchmark_three_seed/*/validation_history.json`, and workbook sheet `Supplementary Figure 9`. |
+| Supplementary Fig. 9a–c, three-seed test results; Supplementary Fig. 9d, validation curves | `results/analysis_v3.json`, `results/all_test_episodes.csv.gz`, `models/benchmark_three_seed/*/validation_history.json`, and workbook sheet `Supplementary Figure 9`. |
+
+For Supplementary Fig. 6b, scene numbers in the workbook are one-based: workbook scene `n` corresponds to `scene_index = n − 1` in `results/per_scene_summary.csv`.
 
 The CSV prefixes `Fig15`, `Fig16` and `Fig17` are retained **legacy analysis figure numbers**, not the current manuscript figure numbers. `Fig15_estimates_and_intervals.csv` includes recovery allowing self-collisions: its 8.18 pp MM-PPO–point-cloud gain belongs to that endpoint. The primary collision-free gain is 8.51 pp in `benchmark_retrained.json` → `collision_free` and Table 1. Use the endpoint and worksheet mappings above when comparing values.
 

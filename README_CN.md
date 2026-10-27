@@ -69,7 +69,7 @@ dotnet build operator-console/AutoSurgView.OperatorConsole.csproj -c Release
 
 | 论文结果 | 文件及字段或工作表 |
 |---|---|
-| 表 1 的输入模态结果、补充表 1 | `results/benchmark_retrained.json` 的 `collision_free`、`summary`、`pooled_rates`；九个策略的单独数值见 `results/seed_level.csv`；图像区域终点见 `results/analysis_v3.json`。 |
+| 表 1 的输入模态结果、补充表 1（含最终检查点比较） | `results/benchmark_retrained.json` 的 `collision_free`、`summary`、`pooled_rates`；九个策略的单独数值见 `results/seed_level.csv`；图像区域终点和最终检查点恢复结果见 `results/analysis_v3.json`（`summary[*].final_ckpt_recovery_cf`）；最终检查点的逐事件记录见 `results/all_test_episodes.csv.gz`（`checkpoint=test_final`）。 |
 | 图 3a：无碰撞恢复率 | 工作簿 `Figure 3` 的 a 面板；`results/seed_level.csv` 的 `macro_strict_success`；`results/benchmark_retrained.json` 的 `collision_free`。 |
 | 图 3b：终止遮挡评分 | 工作簿 `Figure 3` 的 b 面板；`results/seed_level.csv` 的 `mean_final`。 |
 | 图 3c：最终图像区域恢复率 | 工作簿 `Figure 3` 的 c 面板；`results/analysis_v3.json` 的 `secondary_O_le_20`；原始终态测量见 `results/final_state_O.csv.gz`。 |
@@ -77,7 +77,9 @@ dotnet build operator-console/AutoSurgView.OperatorConsole.csproj -c Release
 | 补充图 6、7 | `results/episodes.csv.gz`、`per_scene_summary.csv`、`seed_level.csv`、`source_data/Fig16_curves_and_intervals.csv`，以及对应工作表。 |
 | 表 1 的安全滤波结果、图 3f/g、补充表 2 | 工作簿 `Figure 3`、`Supplementary Figure 10`、`Supplementary Figure 11`。 |
 | 图 4、5、6 及其余定量补充图 | 工作簿中按相应图号命名的工作表。 |
-| 补充图 9：验证及最终检查点比较 | `results/analysis_v3.json`、`results/all_test_episodes.csv.gz`、`models/benchmark_three_seed/*/validation_history.json`，以及 `Supplementary Figure 9` 工作表。 |
+| 补充图 9a–c：三种子测试结果；补充图 9d：验证曲线 | `results/analysis_v3.json`、`results/all_test_episodes.csv.gz`、`models/benchmark_three_seed/*/validation_history.json`，以及 `Supplementary Figure 9` 工作表。 |
+
+补充图 6b 的工作簿场景编号从 1 开始：工作簿中的场景 `n` 对应 `results/per_scene_summary.csv` 中的 `scene_index = n − 1`。
 
 CSV 文件名前缀 `Fig15`、`Fig16`、`Fig17` 是保留的旧分析图号，不是当前论文图号。`Fig15_estimates_and_intervals.csv` 中的 8.18 pp 对应“允许自碰撞的恢复率”下 MM-PPO 相对点云配置的增益；主要终点“无碰撞恢复率”的增益为 8.51 pp，见 `benchmark_retrained.json` 的 `collision_free` 和表 1。比较数值时应同时核对终点定义。
 
