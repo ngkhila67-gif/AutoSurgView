@@ -16,11 +16,11 @@
   "figure_source_data": {
     "file": "Source Data.xlsx",
     "worksheets": 19,
-    "sha256": "4e2dd91fe252ac5d3728576d9a1387ff632082da9e72c1234adbe38733d6c947"
+    "sha256": "aae8f9d66c8983540b1526213bdd64108ad58f33de5468dbf2fe720974fb80dd"
   },
   "verification": {
     "model_weights_and_training_manifests_unchanged": true,
-    "numerical_values_unchanged": true,
+    "numerical_values_unchanged": false,
     "point_clouds_included": false,
     "numerical_reanalysis_passed": true,
     "n_candidate_episodes": 143280,
@@ -48,7 +48,8 @@
       "optimizer_updates": 2,
       "complete_training_run_performed": false
     },
-    "linux_execution_tested_in_this_update": false
+    "linux_execution_tested_in_this_update": false,
+    "numerical_values_note": "Measurement values and formulas are unchanged relative to the previous public workbook. Pose and scene identifiers were renumbered, and four explanatory labels were updated."
   },
   "files": {
     ".gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
@@ -58,7 +59,7 @@
     "PACKAGE CONTENTS.txt": "b37bc425cff11c67a6dc13464cd70b839dc67169fed81f7d51c62e49f2a0dcc9",
     "README.md": "93acd595e157b48ef05fd86e7397f582ac9bb34d288608d248caddf5db8d737e",
     "README_CN.md": "e46ea6c1355a6828d9f6e7ba0794d545859600eabbb3c29b0f7b958353634f42",
-    "Source Data.xlsx": "4e2dd91fe252ac5d3728576d9a1387ff632082da9e72c1234adbe38733d6c947",
+    "Source Data.xlsx": "aae8f9d66c8983540b1526213bdd64108ad58f33de5468dbf2fe720974fb80dd",
     "THIRD_PARTY_NOTICES.md": "47ef36edf8fed058d20602f2970b79da6a905c2cac70376c12ceb05eb0c3d644",
     "docs/DEPENDENCIES.md": "9717ca71a87e85d5ce4c75ab7e5e80b532b377a493532619ff64fc3da6aa5598",
     "models/README.md": "8888b7307ed063c7e9903587ae977561945622c441a0d2e833d418751ac1b6c5",
